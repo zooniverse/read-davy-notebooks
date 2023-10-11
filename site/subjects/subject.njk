@@ -1,0 +1,29 @@
+---
+layout: default
+pagination:
+  data: subjects
+  size: 1
+  alias: subject
+permalink: "/subjects/{{ subject.id}}/"
+---
+<main class="subject">
+    <h1>Subject {{ subject.id }}</h1>
+
+    <div class="subjectGrid">
+      {% for location in subjectLocations %}
+      <img width=300 alt="{{location.alt}}" src="{{location.src}}" />
+      {% endfor %}
+      <section>
+        <h2>Metadata</h2>
+        <dl>
+        {% for key, value in subject.metadata %}
+          <dt>{{ key }}</dt>
+          <dd>{{ value | dump }}</dd>
+        {% endfor %}
+        </dl>
+      </section>
+    </div>
+    <script>
+    console.log(fetchReductions({{workflowID}}, {{subject.id}}))
+    </script>
+</main>
