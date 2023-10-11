@@ -1,17 +1,50 @@
 const fetchWithRetry = require('./fetchWithRetry')
-const fetchAllSubjects = require('./subjects')
 
-async function workflowID(subjectSetID) {
-  const { subject_sets } = await fetchWithRetry(`/subject_sets/${subjectSetID}`)
-  const [subjectSet] = subject_sets
-  return subjectSet
+/*
+Fetches ALL Subject Sets from a Project.
+
+Ouput:
+(array of objects) array of Panoptes Subject Set resources 
+ */
+async function fetchAllSubjectSets(query) {
+  let allSubjectSets = []
+  let continueFetching = true
+  let page = 1
+
+  while (continueFetching) {
+    const { subject_sets, meta } = await fetchSubjectSetsByPage(query, page)
+    allSubjectSets = allSubjectSets.concat(subject_sets)
+    continueFetching = (+meta.page <= +meta.page_count) || false
+    page++
+  }
+
+  const uniqueSubjectSets = [...new Set(allSubjectSets)]
+  console.log('subject sets:', uniqueSubjectSets.length)
+  return uniqueSubjectSets
 }
 
-async function fetchSubjectSets() {
-  const subjects = await fetchAllSubjects
-  const subjectSets = subjects.map(s => s.links.subject_sets[0]).filter(Boolean)
-  const uniqueSubjectSets = [...new Set(subjectSets)]
-  return await Promise.all(uniqueSubjectSets.map(workflowID))
+/*
+Fetches SOME Subject Sets from a Project.
+
+Output: (object) {
+  subject_sets: (array) array of Panoptes Subject resources
+  meta: (object) contains .count (total items available) and .page_count (total pages available)
+}
+ */
+async function fetchSubjectSetsByPage(query, page = 1, pageSize = 100) {
+  try {
+    const { subject_sets, meta }  = await fetchWithRetry('/subject_sets', {
+      ...query,
+      page,
+      page_size: pageSize
+    })
+    return { subject_sets, meta: meta.subject_sets }
+  } catch (err) {
+    console.error('ERROR: fetchSubjectSetsByPage()')
+    console.error('- error: ', err)
+    console.error('- args: ', projectId, page, pageSize)
+    throw(err)
+  }
 }
 
-module.exports = fetchSubjectSets()
+module.exports = fetchAllSubjectSets({ project_id: '9006' })
