@@ -2,9 +2,7 @@ const fetchWithRetry = require('./fetchWithRetry')
 const fetchAllSubjects = require('./subjects')
 
 async function workflowID(subjectSetID) {
-  console.log(`/subject_sets/${subjectSetID}`)
   const { subject_sets } = await fetchWithRetry(`/subject_sets/${subjectSetID}`)
-  console.log(subject_sets)
   const [subjectSet] = subject_sets
   return subjectSet
 }
