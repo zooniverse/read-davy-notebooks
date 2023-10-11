@@ -92,7 +92,9 @@ async function fetchReductions(workflowID, subjectID) {
     }
   }`
   const response = await caesarClient.request(query.replace(/\s+/g, ' '))
-  return consensusLines(response?.workflow?.subject_reductions)
+  const consensus = await consensusLines(response?.workflow?.subject_reductions)
+  const transcription = consensus.map(line => line.consensusText)
+  document.getElementById('page-transcription').innerHTML = transcription.join('<br>')
 }
 
 window.fetchReductions = fetchReductions
