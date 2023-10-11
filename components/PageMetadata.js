@@ -18,7 +18,7 @@ module.exports = function({ page, title = 'Read Davy\'s Notebooks', description,
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Read Davy's Notebooks'" />
+    <meta property="og:site_name" content="Read Davy's Notebooks" />
     <meta property='og:url' content="https://zooniverse.github.io/read-davy-notebooks${ page.url }" />
     <meta property='og:title' content="${ title }" />
     ${ description ? metaDesc(description) : ''}
