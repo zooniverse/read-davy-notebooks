@@ -6,9 +6,14 @@ pagination:
   alias: subject
 permalink: "/subjects/{{ subject.id}}/"
 ---
+<nav aria-label="Page navigation">
+  <ol>
+    <li>{% if pagination.href.previous %}<a href="{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+    <li>{% if pagination.href.next %}<a href="{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
+  </ol>
+</nav>
 <main class="subject">
     <h1>Subject {{ subject.id }}</h1>
-
     <div class="subjectGrid">
       {% for location in subjectLocations %}
       <img width=300 alt="{{location.alt}}" src="{{location.src}}" />
@@ -27,6 +32,12 @@ permalink: "/subjects/{{ subject.id}}/"
         </dl>
       </section>
     </div>
+    <nav aria-label="Page navigation">
+      <ol>
+        <li>{% if pagination.href.previous %}<a href="/read-davy-notebooks{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+        <li>{% if pagination.href.next %}<a href="/read-davy-notebooks{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
+      </ol>
+    </nav>
     <script>
     console.log(fetchReductions({{workflowID}}, {{subject.id}}))
     </script>
