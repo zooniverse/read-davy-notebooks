@@ -17,11 +17,16 @@ function ogImage({ subject }) {
   return firstImage['image/jpeg']
 }
 
-function description({ subject, classifications }) {
-  return 'Page description goes here.'
+function description({ subject, subjectSets, workflows }) {
+  const workflow = workflows.find(w => w.id == workflowID({ subject, subjectSets }))
+  const pageNumber = subject.metadata['#priority']
+  if (workflow) {
+    return `${workflow.display_name} page ${pageNumber}`
+  }
+  return `Workflow ${workflowID({ subject, subjectSets })} page ${pageNumber}`
 }
 
-async function workflowID({ subject, subjectSets }) {
+function workflowID({ subject, subjectSets }) {
   const [subjectSetID] = subject.links.subject_sets
   const subjectSet = subjectSets.find(s => s.id == subjectSetID)
   if (subjectSet) {

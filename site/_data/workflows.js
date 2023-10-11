@@ -20,7 +20,7 @@ async function fetchAllWorkflows(query) {
 
   const uniqueWorkflows = [...new Set(allWorkflows)]
   console.log('workflows:', uniqueWorkflows.length)
-  return uniqueWorkflows.slice(100)
+  return uniqueWorkflows
 }
 
 /*
