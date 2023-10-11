@@ -1,5 +1,3 @@
-const { parse } = require("csv-parse/sync");
-
 module.exports = function (eleventyConfig) {
   eleventyConfig.addLayoutAlias("default", "layouts/default.njk");
 
