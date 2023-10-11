@@ -8,8 +8,8 @@ permalink: "/subjects/{{ subject.id}}/"
 ---
 <nav aria-label="Page navigation">
   <ol>
-    <li>{% if pagination.href.previous %}<a href="{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
-    <li>{% if pagination.href.next %}<a href="{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
+    <li>{% if pagination.href.previous %}<a href="/read-davy-notebooks{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+    <li>{% if pagination.href.next %}<a href="/read-davy-notebooks{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
   </ol>
 </nav>
 <main class="subject">
