@@ -18,3 +18,17 @@ nav > ol {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+#notebooks > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 20ch);
+  grid-gap: 1ch;
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
+#notebooks > ul > li {
+  background: #f7f7f7;
+  padding: .5ch;
+  outline: 1px solid #ddd;
+}

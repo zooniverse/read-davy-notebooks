@@ -1,0 +1,14 @@
+---
+layout: default
+title: Davy's Notebooks
+description: All of Humphry Davy's transcribed notebooks
+---
+<main id="notebooks">
+  <h1>Notebooks</h1>
+  <ul>
+    {% for link in titlePages %}
+    <li><a href="{{ link.href }}">{{ link.title }}</a></li>
+    {% endfor %}
+  </ul>
+</main>
+
