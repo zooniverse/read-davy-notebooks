@@ -9,21 +9,25 @@ permalink: "/subjects/{{ subject.id}}/"
 <nav aria-label="Page navigation">
   <ol>
     <li>{% if pagination.href.previous %}<a href="/read-davy-notebooks{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+    <li><a href="/read-davy-notebooks/notebooks/">Davy's Notebooks</a></li>
     <li>{% if pagination.href.next %}<a href="/read-davy-notebooks{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
   </ol>
 </nav>
-<main class="subject">
-    <h1>Subject {{ subject.id }}</h1>
+<main class="subject" aria-labelledby="page-heading">
+    <h1 id="page-heading">{{ workflow.display_name }} page {{ subject.metadata['#priority'] }}</h1>
     <div class="subjectGrid">
-      {% for location in subjectLocations %}
-      <img width=300 alt="{{location.alt}}" src="{{location.src}}" />
-      {% endfor %}
-      <section>
-        <h2>Page transcription</h2>
+      <section aria-labelledby="subject-heading">
+        <h2 id="subject-heading">Subject {{ subject.id }}</h2>
+        {% for location in subjectLocations %}
+        <img width=300 alt="{{location.alt}}" src="{{location.src}}" />
+        {% endfor %}
+      </section>
+      <section aria-labelledby="subject-transcription">
+        <h2 id="subject-transcription">Page transcription</h2>
         <div id="page-transcription"></div>
       </section>
-      <section>
-        <h2>Metadata</h2>
+      <section aria-labelledby="subject-metadata">
+        <h2 id="subject-metadata">Metadata</h2>
         <dl>
         {% for key, value in subject.metadata %}
           <dt>{{ key }}</dt>
@@ -35,10 +39,11 @@ permalink: "/subjects/{{ subject.id}}/"
     <nav aria-label="Page navigation">
       <ol>
         <li>{% if pagination.href.previous %}<a href="/read-davy-notebooks{{ pagination.href.previous }}">Previous</a>{% else %}Previous{% endif %}</li>
+        <li><a href="/read-davy-notebooks/notebooks/">Davy's Notebooks</a></li>
         <li>{% if pagination.href.next %}<a href="/read-davy-notebooks{{ pagination.href.next }}">Next</a>{% else %}Next{% endif %}</li>
       </ol>
     </nav>
     <script>
-      fetchReductions({{workflowID}}, {{subject.id}})
+      fetchReductions({{workflow.id}}, {{subject.id}})
     </script>
 </main>

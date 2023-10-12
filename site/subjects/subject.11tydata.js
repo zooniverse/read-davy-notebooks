@@ -18,22 +18,22 @@ function ogImage({ subject }) {
 }
 
 function description({ subject, subjectSets, workflows }) {
-  const workflow = workflows.find(w => w.id == workflowID({ subject, subjectSets }))
+  const w = workflow({ subject, subjectSets, workflows })
   const pageNumber = subject.metadata['#priority']
-  if (workflow) {
-    return `${workflow.display_name} page ${pageNumber}`
+  if (w) {
+    return `${w.display_name} page ${pageNumber}`
   }
-  return `Workflow ${workflowID({ subject, subjectSets })} page ${pageNumber}`
+  return `Notebook not found for page ${pageNumber}`
 }
 
-function workflowID({ subject, subjectSets }) {
+function workflow({ subject, subjectSets, workflows }) {
   const [subjectSetID] = subject.links.subject_sets
   const subjectSet = subjectSets.find(s => s.id == subjectSetID)
   if (subjectSet) {
     const [workflowID] = subjectSet.links.workflows
-    return workflowID
+    return workflows.find(w => w.id == workflowID)
   }
-  return -1
+  return null
 }
 
 module.exports = {
@@ -42,6 +42,6 @@ module.exports = {
     subjectLocations,
     description,
     ogImage,
-    workflowID
+    workflow
   }
 }
