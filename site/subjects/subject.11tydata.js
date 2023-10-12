@@ -1,6 +1,3 @@
-const slugify = require('slugify');
-const fetchWithRetry = require('../_data/fetchWithRetry.js');
-
 function subjectTitle({ subject }) {
   return `Subject ${subject.id}`;
 }
