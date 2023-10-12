@@ -10,7 +10,22 @@ body {
 
 .subjectGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 40ch);
+  grid-template-columns: repeat(auto-fit, 39ch);
+  grid-gap: .5ch;
+}
+
+#subject-metadata + dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: .5ch;
+}
+
+#subject-metadata + dl > dt {
+  font-weight: bold;
+}
+
+#subject-metadata + dl > dd {
+  margin: 0;
 }
 
 nav > ol {
